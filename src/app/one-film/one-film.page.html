@@ -1,0 +1,60 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-button slot="start" color="light">
+            <ion-back-button defaultHref="/home"></ion-back-button>
+        </ion-button>
+        <ion-title>Details about film</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-card>
+        <img src="https://image.tmdb.org/t/p/w500{{movie?.poster_path}}"/>
+        <ion-card-header>
+
+            <ion-badge color="success">
+                <ion-icon name="thumbs-up-outline"></ion-icon>
+                {{movie?.popularity}}
+            </ion-badge>
+            <ion-card-title>{{movie?.title}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            {{movie?.overview}}
+        </ion-card-content>
+        <ion-item-divider color="secondary" button (click)="m = !m"
+                          [class.active-parent]="m" detail="false">
+            <ion-icon slot="start" name="arrow-down-outline" *ngIf="!m"></ion-icon>
+            <ion-icon slot="start" name="arrow-up-outline" *ngIf="m"></ion-icon>
+            <ion-label>Additional information</ion-label>
+        </ion-item-divider>
+        <ion-list *ngIf="m">
+            <ion-item>
+                <ion-label>Budget</ion-label>
+                {{movie?.budget}}
+            </ion-item>
+            <ion-item>
+                <ion-label>Homepage</ion-label>
+                {{movie?.homepage}}
+            </ion-item>
+            <ion-item>
+                <ion-label>Release date</ion-label>
+                {{movie?.release_date}}
+            </ion-item>
+        </ion-list>
+
+        <ion-item>
+            <ion-label>
+                Production companies
+            </ion-label>
+            <ion-item-divider *ngFor="let pc of movie?.production_companies">
+                <!--        <img src="https://image.tmdb.org/t/p/w300{{movie?.production_companies.logo_path}}" />-->
+                {{pc['name']}}
+                {{pc["origin_country"]}}
+            </ion-item-divider>
+        </ion-item>
+
+
+    </ion-card>
+</ion-content>
+
+

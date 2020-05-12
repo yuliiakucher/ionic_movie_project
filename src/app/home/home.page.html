@@ -1,20 +1,31 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Movies
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-content [fullscreen]="true">
+  <ion-card *ngFor="let film of films" >
+    <img src="https://image.tmdb.org/t/p/w400{{film.backdrop_path}}" />
+    <ion-card-header>
+      <ion-badge color="success">
+        <ion-icon name="thumbs-up-outline"></ion-icon>
+        {{film.popularity}}</ion-badge>
+      <ion-card-title>{{film.title}}</ion-card-title>
+      <ion-badge *ngFor="let g of film.genre_ids" (click)="goToGenre(g)">
+        {{g}}
+      </ion-badge>
+    </ion-card-header>
+    <ion-card-content>
+      {{film.overview}}
+      <ion-button size="small" color="medium" (click)="navigate(film)">more...</ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+
+
+<!--<app-one-film *ngFor="let film of films.results" [movie]="film"></app-one-film>-->
+<router-outlet></router-outlet>
