@@ -11,28 +11,33 @@
     <ion-card>
         <img src="https://image.tmdb.org/t/p/w500{{movie?.poster_path}}"/>
         <ion-card-header>
-
             <ion-badge color="success">
                 <ion-icon name="thumbs-up-outline"></ion-icon>
                 {{movie?.popularity}}
             </ion-badge>
+            <ion-item>
+                <ion-badge *ngFor="let g of movie?.genres" >
+                    {{g.name}}
+                </ion-badge>
+            </ion-item>
+
             <ion-card-title>{{movie?.title}}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
             {{movie?.overview}}
         </ion-card-content>
         <ion-item-divider color="secondary" button (click)="m = !m"
-                          [class.active-parent]="m" detail="false">
+                          [class.active-parent]="m" >
             <ion-icon slot="start" name="arrow-down-outline" *ngIf="!m"></ion-icon>
             <ion-icon slot="start" name="arrow-up-outline" *ngIf="m"></ion-icon>
-            <ion-label>Additional information</ion-label>
+            <ion-label>Additional information about the film</ion-label>
         </ion-item-divider>
-        <ion-list *ngIf="m">
+        <ion-list *ngIf="m" class="sub-item">
             <ion-item>
                 <ion-label>Budget</ion-label>
-                {{movie?.budget}}
+                {{movie?.budget}} $
             </ion-item>
-            <ion-item>
+            <ion-item *ngIf="movie.homepage">
                 <ion-label>Homepage</ion-label>
                 {{movie?.homepage}}
             </ion-item>
@@ -40,18 +45,40 @@
                 <ion-label>Release date</ion-label>
                 {{movie?.release_date}}
             </ion-item>
+            <ion-item>
+                <ion-label>Original language</ion-label>
+                {{movie?.original_language}}
+            </ion-item>
+            <ion-item>
+                <ion-label>Original title</ion-label>
+                {{movie?.original_title}}
+            </ion-item>
+            <ion-item>
+                <ion-label>Runtime</ion-label>
+                {{movie?.runtime}} minutes
+            </ion-item>
         </ion-list>
 
-        <ion-item>
-            <ion-label>
-                Production companies
-            </ion-label>
-            <ion-item-divider *ngFor="let pc of movie?.production_companies">
-                <!--        <img src="https://image.tmdb.org/t/p/w300{{movie?.production_companies.logo_path}}" />-->
-                {{pc['name']}}
-                {{pc["origin_country"]}}
-            </ion-item-divider>
-        </ion-item>
+        <ion-item-divider color="secondary" button (click)="pc = !pc"
+                          [class.active-parent]="pc" detail="false">
+            <ion-icon slot="start" name="arrow-down-outline" *ngIf="!pc"></ion-icon>
+            <ion-icon slot="start" name="arrow-up-outline" *ngIf="pc"></ion-icon>
+            <ion-label>Production companies</ion-label>
+        </ion-item-divider>
+        <ion-list *ngIf="pc">
+            <ion-list *ngFor="let pc of movie?.production_companies" >
+                <ion-item *ngIf="pc['logo_path']">
+                    <img src="https://image.tmdb.org/t/p/w500{{pc['logo_path']}}"/>
+                </ion-item>
+                <ion-item>
+                    <ion-label>{{pc["name"]}}</ion-label>
+                </ion-item>
+                <ion-item>
+                    <ion-label>{{pc["origin_country"]}}</ion-label>
+                </ion-item>
+            </ion-list>
+        </ion-list>
+
 
 
     </ion-card>

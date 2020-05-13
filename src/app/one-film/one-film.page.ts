@@ -13,6 +13,7 @@ export class OneFilmPage implements OnInit {
 
     movie: MovieModel;
     m: boolean;
+    pc: boolean;
 
     constructor(
         private movieService: MovieService,

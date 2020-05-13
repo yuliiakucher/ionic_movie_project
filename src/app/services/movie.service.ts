@@ -22,4 +22,8 @@ export class MovieService {
   getGenre(): Observable<GenreModel[]>{
     return this.httpClient.get<GenreModel[]>('https://api.themoviedb.org/3/genre/movie/list?api_key=763e927c3da1db2958384dd02cddaa12')
   }
+
+  getMovieByGenre(id: string): Observable<MovieModel[]>{
+    return this.httpClient.get<MovieModel[]>(`https://api.themoviedb.org/3/discover/movie?api_key=763e927c3da1db2958384dd02cddaa12&with_genres=${id}`)
+  }
 }

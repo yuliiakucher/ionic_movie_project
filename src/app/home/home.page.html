@@ -6,6 +6,29 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-menu contentId="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-menu-toggle >
+
+        <ion-item routerLink="genre" routerDirection="root">
+          <ion-icon name="film-outline" slot="start"></ion-icon>
+          <ion-label>Genres</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+<ion-router-outlet id="content" main></ion-router-outlet>
+
+
 
 <ion-content [fullscreen]="true">
   <ion-card *ngFor="let film of films" >
@@ -15,7 +38,7 @@
         <ion-icon name="thumbs-up-outline"></ion-icon>
         {{film.popularity}}</ion-badge>
       <ion-card-title>{{film.title}}</ion-card-title>
-      <ion-badge *ngFor="let g of film.genre_ids" (click)="goToGenre(g)">
+      <ion-badge *ngFor="let g of film['genre_ids']" (click)="goToGenre(g)">
         {{g}}
       </ion-badge>
     </ion-card-header>
@@ -27,5 +50,4 @@
 </ion-content>
 
 
-<!--<app-one-film *ngFor="let film of films.results" [movie]="film"></app-one-film>-->
 <router-outlet></router-outlet>

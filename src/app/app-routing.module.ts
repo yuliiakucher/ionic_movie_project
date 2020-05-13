@@ -7,9 +7,17 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
+    path: 'home/:id/genres',
+    loadChildren: () => import('./genres/genres.module').then(m => m.GenresPageModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },
+  {
+    path: 'genres',
+    loadChildren: () => import('./genres/genres.module').then( m => m.GenresPageModule)
   },
 ];
 

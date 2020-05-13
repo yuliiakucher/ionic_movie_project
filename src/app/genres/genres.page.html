@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button slot="start" color="light">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-button>
+    <ion-title>Films by genre</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngFor="let movie of moviesByGenre">
+    <ion-item (click)="navigate(movie)">
+      <ion-avatar slot="start">
+        <img src="https://image.tmdb.org/t/p/w500{{movie?.poster_path}}">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{movie?.title}}</h2>
+        <h3>{{movie?.tagline}}</h3>
+        <p>{{movie?.overview}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

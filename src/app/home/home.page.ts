@@ -35,7 +35,7 @@ export class HomePage {
 
     navigate(film: MovieModel) {
         this.router.navigate(
-            [film.id,'onePage'],
+            [film.id, 'onePage'],
             {
                 relativeTo: this.activatedRoute
             }
@@ -43,7 +43,15 @@ export class HomePage {
     }
 
     goToGenre(g: any) {
-        console.log(g)
+        this.movieService.getGenre().subscribe(value => {
+            for (const f of value['genres']) {
+                if (g === f.name)
+                    this.router.navigate(
+                        [f.id, 'genres'],
+                        {relativeTo: this.activatedRoute}
+                    )
+            }
+        })
 
     }
 }
